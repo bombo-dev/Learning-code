@@ -3,13 +3,12 @@ package com.example.redis.springdataredis;
 import com.example.redis.RedisIntegrationTest;
 import com.example.redis.domain.redis.Fruits;
 import com.example.redis.domain.redis.repository.FruitsRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisKeyValueAdapter;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -17,6 +16,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@EnableRedisRepositories(enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
 public class SpringDataRedisTest extends RedisIntegrationTest {
 
     @Autowired
@@ -58,6 +58,7 @@ public class SpringDataRedisTest extends RedisIntegrationTest {
         assertThat(findBanana.getCreatedAt()).isEqualTo(saveTime);
     }
 
+    // TTL 이슈
     @DisplayName("TTL을 지정했을 때 이후에 탐색이 되면 안된다.")
     @Test
     void findExceedTTLFruits() throws InterruptedException {
@@ -70,10 +71,22 @@ public class SpringDataRedisTest extends RedisIntegrationTest {
         fruitsRepository.save(banana);
         
         // when
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         Optional<Fruits> findBanana = fruitsRepository.findById(banana.getId());
+        long count = fruitsRepository.count();
 
         // then
         assertThat(findBanana).isEmpty();
+        assertThat(count).isEqualTo(0);
+    }
+
+    @DisplayName("@Indexed를 지정한다면 인덱싱 되어 출력된다.")
+    @Test
+    void test() {
+        // given
+
+        // when
+
+        // then
     }
 }

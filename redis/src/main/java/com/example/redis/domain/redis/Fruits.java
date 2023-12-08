@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@RedisHash(value = "fruits", timeToLive = 5)
+@RedisHash(value = "fruits", timeToLive = 1)
 public class Fruits {
 
     @Id
@@ -21,6 +22,7 @@ public class Fruits {
 
     private Integer stock;
 
+    @Indexed
     private LocalDateTime createdAt;
 
     @Builder
