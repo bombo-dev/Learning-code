@@ -4,7 +4,7 @@
 
 먼저, 초기에 계획 된 우리 팀의 멀티모듈 구조는 다음과 같이 설계되었다.
 
-[사진]
+![Image1](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_1.png)
 
 위 사진처럼 멀티모듈 구조를 레이어별로 가져가기로 했다.
 
@@ -33,7 +33,7 @@ QueryDSL 자체를 외부에서 사용하고 변경 가능성이 있는 모듈�
 
 따라서, Domain 모듈이 QueryDSL이 있는 Infra 모듈을 다음과 같이 의존하도록 설계하였다.
 
-[사진]
+![Image2](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_2.png)
 
 여기서, 이슈가 발생을 했다. QueryDSL에 있는 Infra 영역에서 Domain에 대한 QClass를 생성 할 방법을 찾지 못했다.
 
@@ -55,7 +55,7 @@ QueryDSL을 이용하여 구현한 class를 해당 클래스의 의존관계에�
 해당 문제를 해결하기 위해서는 해당 classPath를 알도록 어떠한 중간 매개체가 필요했다.
 이러한 문제를 해결하기 위해 인프라 구조를 다음과 같이 가져가게 되었다.
 
-[사진]
+![Image3](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_3.png)
 
 Mapper 모듈에서 querydsl의 모듈을 컴파일단에서 의존하고 application에서 Mapper 모듈을 의존하도록 하였다.
 
@@ -71,7 +71,7 @@ Mapper 모듈에서 querydsl의 모듈을 컴파일단에서 의존하고 applic
 
 해당 피드백을 듣고 난 이후 queryDSL에 대한 모듈에 대한 의존성을 다음과 같이 분리를 하게 되었다.
 
-[사진]
+![Image4](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_4.png)
 
 queryDSL을 외부 의존성으로 보지말고 JPA 사용한다면 queryDSL을 거의 확정적으로 사용하게 될 것이라고 판단했기 때문이다.
 
@@ -80,19 +80,19 @@ queryDSL을 외부 의존성으로 보지말고 JPA 사용한다면 queryDSL을 
 QueryDSL은 다음과 같은 이유로 모듈을 분리하지 않게 되었다. 하지만 export 모듈로 사용 할 Redis와 MongoDB는 외부의 모듈로 분리해야한다고 생각했다.
 이를 다음과 같이 모듈 분리를 시도하였다.
 
-[사진]
+![Image5](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_5.png)
 
 하지만, 이렇게 모듈을 분리를 하고 난 이후 들게 된 생각은 인프라 모듈 자체에 대한 의존성이 너무 높아진 부분이다.
 
 의존성을 역전하기 위해서 아래 사진처럼 Application 영역에 인터페이스를 두고 infra 모듈이 애플리케이션 영역을 의존하여 확장성을 높이고자 하였다.
 
-[사진]
+![Image6](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_6.png)
 
 하지만 두 번째 이슈와 비슷한 문제가 발생을 했다. 
 infra 모듈에 대한 참조가 끊겨서 구성 클래스를 찾을 수 없는 문제가 생긴 것이다. 이러한 문제를 해결하기 위해서는 실행 모듈이 있는 api가 참조 가능한 어떠한 모듈에서 infra 모듈을 결국 참조해야만 했다. 
 이를 해결하기 위한 방법을 고민을 해봤으나, 가장 간단한 방법은 api 모듈이 infra 모듈을 다음과 같이 참조하도록 하면 문제가 해결이 되긴 했다.
 
-[사진]
+![Image7](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_7.png)
 
 하지만, 이 방법이 올바르다는 생각이 들지 않았다.
 
@@ -102,7 +102,7 @@ infra 모듈에 대한 참조가 끊겨서 구성 클래스를 찾을 수 없는
 
 최종적으로 위와 같은 구조로 가지고 갔지만 다시 한 번 멀티 모듈을 설계한다면 다음과 같이 설계 할 것 같다.
 
-[사진]
+![Image8](https://github.com/bombo-dev/Learning-code/blob/main/project-multimodule/image/image_8.png)
 
 너무나도 많은 추상화는 복잡도를 높이고, 오히려 코드의 가독성을 떨구기도 하며 빈 주입, 테스트 등 여러가지 문제점이 너무나도 많이 발생하게 되었다.
 
