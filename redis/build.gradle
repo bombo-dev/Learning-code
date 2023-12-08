@@ -16,14 +16,20 @@ repositories {
 }
 
 dependencies {
+	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
+	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
+	// testContainer
+	testImplementation 'org.testcontainers:testcontainers:1.19.1'
+
+	// Junit
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

@@ -1,14 +1,17 @@
 package com.example.redis.domain.redis;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.time.LocalDateTime;
 
 @Getter
-@RedisHash(value = "fruits", timeToLive = 30)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RedisHash(value = "fruits", timeToLive = 5)
 public class Fruits {
 
     @Id
