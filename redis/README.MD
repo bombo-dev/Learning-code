@@ -81,3 +81,127 @@ TTL이 1초이기때문에 1초 뒤에는 Redis에 저장됐던 데이터가 삭
 
 [참고]
 https://hyperconnect.github.io/2022/12/12/fix-increasing-memory-usage.html
+
+## Redis LocalDateTime Serialize Issue
+Spring Data Redis는 Key-Value 구조의 자료구조만 사용하기 때문에 다른 자료구조도 테스트 해보기 위하여 RedisTemplate를 직접 만들어서 학습 테스트를 진행해봤습니다.
+
+```java
+redisTemplate.opsForValue();
+```
+
+를 사용하여 key-value 자료구조에 대해서 Primitive Type, Reference Type 두 경우에 대해서 테스트를 진행해보고자 하였습니다.
+
+```java
+    @DisplayName("redisTemplate key-value 형식으로 기본형 타입 저장")
+    @Test
+    void saveValueOpsPrimitiveType() {
+        // given
+        ValueOperations<String, Object> stringObjectValueOperations = redisTemplate.opsForValue();
+
+        String key = "KEY";
+        stringObjectValueOperations.set(key, 1);
+        stringObjectValueOperations.set(key, 2);
+        stringObjectValueOperations.set(key, 3);
+
+        // when
+        Integer value = (Integer) stringObjectValueOperations.get(key);
+        Set<String> keys = redisTemplate.keys(key);
+
+        // then
+        assertThat(keys.size()).isEqualTo(1);
+        assertThat(value).isEqualTo(3);
+    }
+```
+
+먼저, key-value로 기본형 타입을 저장하는 테스트를 진행해봤습니다. 예상대로 마지막 key에 대한 값이 덮어져서 가져와지는 것을 확인 할 수 있었습니다.
+
+다음으로 객체 타입을 저장하려고 시도하였습니다.
+먼저, RedisTemplate는 다음과 같이 생성을 했었습니다.
+
+```java
+    @Bean(name = "defaultRedisTemplate")
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        return redisTemplate;
+    }
+```
+
+이어서, 기본 값 타입 테스트와 비슷하게 다음과 같이 테스트를 작성하였습니다.
+```java
+    @DisplayName("redisTemplate key-value 형식으로 객체 타입 저장")
+    @Test
+    void saveValueOpsReferenceType() {
+        // given
+        ValueOperations<String, Object> stringObjectValueOperations = redisTemplate.opsForValue();
+        String key = "ReferenceKey";
+
+        LocalDateTime serverTime = LocalDateTime.now();
+
+        Fruits apple = Fruits.createFruit("사과", 10, serverTime);
+        Fruits banana = Fruits.createFruit("바나나", 15, serverTime);
+
+        stringObjectValueOperations.set(key, apple);
+        stringObjectValueOperations.set(key, banana);
+        Set<String> keys = redisTemplate.keys(key);
+
+        // when
+        Fruits value = (Fruits) stringObjectValueOperations.get(key);
+
+        // then
+        assertThat(keys.size()).isEqualTo(1);
+        assertThat(value).usingRecursiveComparison().isEqualTo(banana);
+    }
+```
+
+위와 큰 차이가 없기 때문에 가뿐하게 통과 할 줄 알았으나, 테스트는 실패를 했습니다.
+에러를 살펴보니 다음과 같은 메시지가 있었습니다.
+
+```bash
+Could not write JSON: Java 8 date/time type `java.time.LocalDateTime` not supported by default: add Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" to enable handling (through reference chain: com.example.redis.domain.redis.Fruits["createdAt"])
+```
+LocalDateTime을 Serialize 할 수 없으니 jsr310 Module을 추가해달라는 것이었습니다.
+다음과 같이 라이브러리 의존성을 추가해주었습니다.
+
+```gradle
+implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.16.0'
+```
+그러나, 똑같은 에러가 나타나게 되었습니다.
+
+해당 에러를 해결하기 위해 구글링을 한 결과 한 포스팅에서 해답을 찾을 수 있었습니다.
+
+https://velog.io/@bagt/Redis-%EC%97%AD%EC%A7%81%EB%A0%AC%ED%99%94-%EC%82%BD%EC%A7%88%EA%B8%B0-feat.-RedisSerializer
+
+해당 포스팅을 참고하여 Redis를 위한 ObjectMapper를 커스터마이징 해주고 RedisTemplate에 다음과 같이 주입해주었습니다.
+
+```java
+    @Bean(name = "redisObjectMapper")
+    public ObjectMapper redisObjectMapper() {
+        BasicPolymorphicTypeValidator validator = BasicPolymorphicTypeValidator.builder()
+                .allowIfSubType(Object.class)
+                .build();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.activateDefaultTyping(validator, ObjectMapper.DefaultTyping.NON_FINAL);
+        return objectMapper;
+    }
+
+    @Bean(name = "defaultRedisTemplate")
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory,
+                                                      @Qualifier("redisObjectMapper") ObjectMapper objectMapper) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        return redisTemplate;
+    }
+```
+그리고 결과는 아래와 같이 성공하는 것을 볼 수 있었습니다.
+
+![result](image-1.png)
+
+[참고]
+https://velog.io/@bagt/Redis-%EC%97%AD%EC%A7%81%EB%A0%AC%ED%99%94-%EC%82%BD%EC%A7%88%EA%B8%B0-feat.-RedisSerializer
