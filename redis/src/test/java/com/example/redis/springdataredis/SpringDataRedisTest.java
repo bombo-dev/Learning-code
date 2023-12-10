@@ -3,14 +3,14 @@ package com.example.redis.springdataredis;
 import com.example.redis.RedisIntegrationTest;
 import com.example.redis.domain.redis.Fruits;
 import com.example.redis.domain.redis.repository.FruitsRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisKeyValueAdapter;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,6 +21,11 @@ public class SpringDataRedisTest extends RedisIntegrationTest {
 
     @Autowired
     private FruitsRepository fruitsRepository;
+
+    @AfterEach
+    public void down() {
+        fruitsRepository.deleteAll();
+    }
 
     @DisplayName("레디스에 저장한다.")
     @Test
@@ -80,13 +85,45 @@ public class SpringDataRedisTest extends RedisIntegrationTest {
         assertThat(count).isEqualTo(0);
     }
 
-    @DisplayName("@Indexed를 지정한다면 인덱싱 되어 출력된다.")
+    @DisplayName("@Indexed를 지정하지 않는다면 보조 인덱스로 검색이 안된다.")
     @Test
-    void test() {
+    void findByStockWithNotIndex() {
         // given
+        LocalDateTime saveTime = LocalDateTime.now();
+        Fruits apple = Fruits.createFruit("사과", 10, saveTime.plusHours(1));
+        Fruits banana = Fruits.createFruit("바나나", 15, saveTime);
+        Fruits pineApple = Fruits.createFruit("파인애플", 13, saveTime.minusDays(1));
+
+        fruitsRepository.save(apple);
+        fruitsRepository.save(banana);
+        fruitsRepository.save(pineApple);
 
         // when
+        Optional<Fruits> findFruits = fruitsRepository.findByStock(apple.getStock());
 
         // then
+        assertThat(findFruits).isEmpty();
+    }
+
+    @DisplayName("@Indexed를 지정한다면 보조 인덱스로 검색이 된다.")
+    @Test
+    void findByStockWithIndex() {
+        // given
+        LocalDateTime saveTime = LocalDateTime.now();
+        Fruits apple = Fruits.createFruit("사과", 10, saveTime.plusHours(1));
+        Fruits banana = Fruits.createFruit("바나나", 15, saveTime);
+        Fruits pineApple = Fruits.createFruit("파인애플", 13, saveTime.minusDays(1));
+
+        fruitsRepository.save(apple);
+        fruitsRepository.save(banana);
+        fruitsRepository.save(pineApple);
+
+        // when
+        Optional<Fruits> findFruits = fruitsRepository.findByName(apple.getName());
+
+        // then
+        assertThat(findFruits).isNotEmpty();
+        assertThat(findFruits.get()).usingRecursiveComparison()
+                .isEqualTo(apple);
     }
 }

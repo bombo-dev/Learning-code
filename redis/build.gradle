@@ -31,6 +31,9 @@ dependencies {
 
 	// Junit
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// jackson
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
 }
 
 tasks.named('bootBuildImage') {

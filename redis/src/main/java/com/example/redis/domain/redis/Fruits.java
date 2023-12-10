@@ -18,11 +18,11 @@ public class Fruits {
     @Id
     private String id;
 
+    @Indexed
     private String name;
 
     private Integer stock;
 
-    @Indexed
     private LocalDateTime createdAt;
 
     @Builder
