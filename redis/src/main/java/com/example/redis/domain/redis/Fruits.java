@@ -8,13 +8,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RedisHash(value = "fruits", timeToLive = 1)
-public class Fruits {
+public class Fruits implements Serializable {
 
     @Id
     private String id;

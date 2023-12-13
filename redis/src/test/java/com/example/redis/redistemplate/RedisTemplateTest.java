@@ -1,5 +1,6 @@
 package com.example.redis.redistemplate;
 
+import com.example.redis.RedisIntegrationTest;
 import com.example.redis.domain.redis.Fruits;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class RedisTemplateTest {
+public class RedisTemplateTest extends RedisIntegrationTest {
 
     @Resource(name = "defaultRedisTemplate")
     private RedisTemplate<String, Object> redisTemplate;
@@ -140,5 +141,37 @@ public class RedisTemplateTest {
         assertThat(stringObjectSetOperations.isMember(KEY, apple2)).isTrue();
         assertThat(stringObjectSetOperations.isMember(KEY, banana)).isTrue();
         assertThat(stringObjectSetOperations.isMember(KEY, waterMellon)).isTrue();
+    }
+
+    @DisplayName("restTemplate key-value(Hash) 형식으로 저장한다.")
+    @Test
+    void saveHashForOps() {
+        // given
+        HashOperations<String, String, Fruits> stringObjectHashOperations = redisTemplate.opsForHash();
+        String KEY = "hashKey";
+
+        LocalDateTime serverTime = LocalDateTime.now();
+        Fruits apple = Fruits.createFruit("사과", 10, serverTime);
+        Fruits banana = Fruits.createFruit("바나나", 15, serverTime);
+        Fruits waterMellon = Fruits.createFruit("수박", 13, serverTime);
+
+        stringObjectHashOperations.put(KEY, "apple", apple);
+        stringObjectHashOperations.put(KEY, "banana", banana);
+        stringObjectHashOperations.put(KEY, "waterMellon", waterMellon);
+
+        // when
+        Set<String> keys = stringObjectHashOperations.keys(KEY);
+        Object notFound = stringObjectHashOperations.get("Unknown", "null");
+
+        Fruits findApple = stringObjectHashOperations.get(KEY, "apple");
+        Fruits findBanana = stringObjectHashOperations.get(KEY, "banana");
+        Fruits findWaterMellon = stringObjectHashOperations.get(KEY, "waterMellon");
+
+        // then
+        assertThat(keys.size()).isEqualTo(3);
+        assertThat(notFound).isNull();
+        assertThat(findApple).usingRecursiveComparison().isEqualTo(apple);
+        assertThat(findBanana).usingRecursiveComparison().isEqualTo(banana);
+        assertThat(findWaterMellon).usingRecursiveComparison().isEqualTo(waterMellon);
     }
 }
