@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.time.LocalDateTime;
+import java.util.StringJoiner;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,5 +39,15 @@ public class Fruits {
                 .stock(stock)
                 .createTime(createTime)
                 .build();
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Fruits.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("name='" + name + "'")
+                .add("stock=" + stock)
+                .add("createdAt=" + createdAt)
+                .toString();
     }
 }

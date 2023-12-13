@@ -205,3 +205,119 @@ https://velog.io/@bagt/Redis-%EC%97%AD%EC%A7%81%EB%A0%AC%ED%99%94-%EC%82%BD%EC%A
 
 [참고]
 https://velog.io/@bagt/Redis-%EC%97%AD%EC%A7%81%EB%A0%AC%ED%99%94-%EC%82%BD%EC%A7%88%EA%B8%B0-feat.-RedisSerializer
+
+---
+## Redis Template 사용 시 주의사항
+최근 Redis 학습 테스트를 진행하면서 발생했던 이슈를 하나 공유하고자합니다.
+
+Redis의 자료구조 중 set 자료구조를 테스트 하고자 하였습니다. 해당 테스트 코드는 다음과 같습니다.
+```java
+    @DisplayName("restTemplate key-value(Set) 형식으로 저장한다.")
+    @Test
+    void saveSetForOps() {
+        // given
+        SetOperations<String, Object> stringObjectSetOperations = redisTemplate.opsForSet();
+        String KEY = "setKey";
+
+        LocalDateTime serverTime = LocalDateTime.now();
+        Fruits apple = Fruits.createFruit("사과", 10, serverTime);
+        Fruits apple2 = Fruits.createFruit("사과", 10, serverTime);
+        Fruits banana = Fruits.createFruit("바나나", 15, serverTime);
+        Fruits waterMellon = Fruits.createFruit("수박", 13, serverTime);
+
+        stringObjectSetOperations.add(KEY, apple, banana, waterMellon, apple2);
+
+        // when
+        Set<Object> sets = stringObjectSetOperations.members(KEY);
+
+        // then
+        assertThat(sets.size()).isEqualTo(3);
+        assertThat(stringObjectSetOperations.isMember(KEY, apple)).isTrue();
+
+        // 객체 내부의 값이 같기때문에 true 이다.
+        assertThat(stringObjectSetOperations.isMember(KEY, apple2)).isTrue();
+        assertThat(stringObjectSetOperations.isMember(KEY, banana)).isTrue();
+        assertThat(stringObjectSetOperations.isMember(KEY, waterMellon)).isTrue();
+    }
+```
+
+해당 테스트 코드를 만들고 수행 했을 때 다음과 같이 전체적으로 통과하는 모습을 볼 수 있습니다.
+
+![사진](image-2.png)
+
+해당 테스트 코드를 조금 수정하고 다시 테스트를 진행해봤습니다. 학습 테스트를 진행중이기 때문에 내가 어떠한 값을 잘 못 지정해주었을 가능성이 있기에 테스트의 결과를 확인해봤습니다.
+
+![사진2](image-3.png)
+
+전혀 예상하지 못한 곳에서 실패를 한 것을 볼 수 있었습니다. set 자료구조를 사용하는 곳도 해당 테스트 하나 뿐이었는데 정말 당황스러웠습니다.
+
+데이터를 더 추가 한 것도 아니고 추가가 되어야 할 이유가 없어보였습니다.
+
+이렇게 생각했던 이유는 해당 테스트 클래스가 TestContainer가 적용되어있다고 생각했었기 때문입니다. 
+
+또한 위와 별개로 테스트 코드를 수행 할 때마다 스프링 부트 서버가 띄워지니 RedisTemplate도 새로이 갱신이 되지 않을까? 하는 생각을 했습니다.
+하지만, 다시 생각해보니 Redis는 원격 서버이기에 Spring Boot 서버와는 별개로 띄워져야했습니다. 
+
+먼저 TestContainer가 적용이 안되어있나 확인을 했고, 이전에 만들어두었던 Redis TestContainer를 띄워주었습니다.
+
+```java
+public class RedisIntegrationTest {
+
+    private static GenericContainer<?> redis = new GenericContainer<>(DockerImageName.parse("redis:5.0.3-alpine"))
+            .withExposedPorts(6379);
+
+    @BeforeAll
+    public static void setUp() {
+        redis.start();
+        System.setProperty("spring.data.redis.host", redis.getHost());
+        System.setProperty("spring.data.redis.port", redis.getMappedPort(6379).toString());
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        redis.stop();
+    }
+}
+
+@SpringBootTest
+public class RedisTemplateTest extends RedisIntegrationTest{
+    ...
+}
+```
+
+다시 테스트를 돌려보았고 해당 테스트는 정상적으로 수행을 된 것을 볼 수 있었습니다.
+그렇다면 어딘가에 redis 서버가 띄워져있다는 것을 짐작 할 수 있었고, 이전에 yml에 다음과 같이 명시해주었던 것을 확인했습니다.
+
+```yml
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+```
+
+바로 localhost에 redis가 띄워져 있는 것을 확인해봤습니다.
+![Alt text](image-4.png)
+
+예상했던 것처럼 프로세스 자체적으로 redis가 띄워져있는 것을 볼 수 있었습니다.
+제가 레디스를 프로세스로 따로 띄우지는 않았기때문에 스프링 서버가 띄워지면서 어디선가 redis를 실행하는 것으로 예상하고 로그를 debug로 변경하였습니다.
+
+```yml
+logging:
+  level:
+    root: DEBUG
+```
+
+그리고 로그를 찾아내려가니 다음과 같은 로그들을 확인 할 수 있었습니다.
+```bash
+2023-12-13T18:16:36.607+09:00 DEBUG 70220 --- [    Test worker] o.s.d.redis.core.RedisConnectionUtils    : Fetching Redis Connection from RedisConnectionFactory
+2023-12-13T18:16:36.608+09:00 DEBUG 70220 --- [    Test worker] io.lettuce.core.RedisClient              : Trying to get a Redis connection for: redis://localhost
+...
+2023-12-13T18:16:36.826+09:00 DEBUG 70220 --- [    Test worker] io.lettuce.core.RedisClient              : Resolved SocketAddress localhost/<unresolved>:6379 using redis://localhost
+2023-12-13T18:16:36.827+09:00 DEBUG 70220 --- [    Test worker] io.lettuce.core.AbstractRedisClient      : Connecting to Redis at localhost/<unresolved>:6379
+```
+다음과 같이 SpringBoot가 자제적으로 명시되어있는 host와 port를 가지고 redis를 찾아서 띄우는 것을 볼 수 있었습니다. 
+
+만약 컴퓨터 자체에 Redis가 설치가 되어있지 않았다면 해당 테스트를 수행하면서 예외가 빠르게 발생했을 것 같다고 생각됩니다.
+
+테스트 코드는 어떤 상황이든 항상 동일한 값을 도출해야하기 때문에 값이 바뀔 수 있는 서버를 사용하기보다 위처럼 TestContainer를 사용하여 테스트의 정합성을 보장해야 할 것입니다.

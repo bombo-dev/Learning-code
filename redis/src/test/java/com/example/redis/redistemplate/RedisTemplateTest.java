@@ -5,9 +5,7 @@ import jakarta.annotation.Resource;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -65,13 +63,82 @@ public class RedisTemplateTest {
 
         stringObjectValueOperations.set(key, apple);
         stringObjectValueOperations.set(key, banana);
-        Set<String> keys = redisTemplate.keys(key);
 
         // when
         Fruits value = (Fruits) stringObjectValueOperations.get(key);
+        Set<String> keys = redisTemplate.keys(key);
 
         // then
         assertThat(keys.size()).isEqualTo(1);
         assertThat(value).usingRecursiveComparison().isEqualTo(banana);
+    }
+
+    @DisplayName("restTemplate key-value(list) 형식으로 저장한다.")
+    @Test
+    void saveListForOps() {
+        // given
+        ListOperations<String, Object> stringObjectListOperations = redisTemplate.opsForList();
+        String KEY = "listKey";
+
+        LocalDateTime serverTime = LocalDateTime.now();
+        Fruits apple = Fruits.createFruit("사과", 10, serverTime);
+        Fruits banana = Fruits.createFruit("바나나", 15, serverTime);
+        Fruits waterMellon = Fruits.createFruit("수박", 13, serverTime);
+
+        stringObjectListOperations.leftPush(KEY, apple);
+        stringObjectListOperations.rightPush(KEY, banana);
+        stringObjectListOperations.leftPush(KEY, waterMellon);
+
+        // when
+        Fruits fruitA = (Fruits) stringObjectListOperations.leftPop(KEY);
+        Fruits fruitB = (Fruits) stringObjectListOperations.leftPop(KEY);
+        Fruits fruitC = (Fruits) stringObjectListOperations.leftPop(KEY);
+
+        // then
+        assertThat(fruitA).usingRecursiveComparison().isEqualTo(waterMellon);
+        assertThat(fruitB).usingRecursiveComparison().isEqualTo(apple);
+        assertThat(fruitC).usingRecursiveComparison().isEqualTo(banana);
+    }
+
+    @DisplayName("restTemplate key-value(list) 형식으로 저장 된 값이 없다면 null을 반환한다.")
+    @Test
+    void saveListForOpsWithEmpty() {
+        // given
+        ListOperations<String, Object> stringObjectListOperations = redisTemplate.opsForList();
+        String KEY = "listKey";
+
+        // when
+        Object object = stringObjectListOperations.leftPop(KEY);
+
+        // then
+        assertThat(object).isNull();
+    }
+
+    @DisplayName("restTemplate key-value(Set) 형식으로 저장한다.")
+    @Test
+    void saveSetForOps() {
+        // given
+        SetOperations<String, Object> stringObjectSetOperations = redisTemplate.opsForSet();
+        String KEY = "setKey";
+
+        LocalDateTime serverTime = LocalDateTime.now();
+        Fruits apple = Fruits.createFruit("사과", 10, serverTime);
+        Fruits apple2 = Fruits.createFruit("사과", 10, serverTime);
+        Fruits banana = Fruits.createFruit("바나나", 15, serverTime);
+        Fruits waterMellon = Fruits.createFruit("수박", 13, serverTime);
+
+        stringObjectSetOperations.add(KEY, apple, banana, waterMellon, apple2);
+
+        // when
+        Set<Object> sets = stringObjectSetOperations.members(KEY);
+
+        // then
+        assertThat(sets.size()).isEqualTo(3);
+        assertThat(stringObjectSetOperations.isMember(KEY, apple)).isTrue();
+
+        // 객체 내부의 값이 같기때문에 true 이다.
+        assertThat(stringObjectSetOperations.isMember(KEY, apple2)).isTrue();
+        assertThat(stringObjectSetOperations.isMember(KEY, banana)).isTrue();
+        assertThat(stringObjectSetOperations.isMember(KEY, waterMellon)).isTrue();
     }
 }
