@@ -52,18 +52,17 @@ class DuplicateUrlInterceptorTest extends RedisIntegrationTest {
                 .doesNotThrowAnyException();
     }
 
-//    @DisplayName("반복된 주소를 시간이 지난 뒤 요청하면 예외가 발생하지 않는다.")
-//    @Test
-//    void duplicateRequestUrlAfterLimitTime() throws InterruptedException {
-//        // given
-//        String id = "A7812";
-//        String url = "/api/v1/users";
-//        interceptor.interceptDuplicateRequest(id, url);
-//        Thread.sleep(3000);
-//        System.out.println(redisTemplate.hasKey(id));
-//
-//        // when & then
-//        assertThatCode(() -> interceptor.interceptDuplicateRequest(id, url))
-//                .doesNotThrowAnyException();
-//    }
+    @DisplayName("반복된 주소를 시간이 지난 뒤 요청하면 예외가 발생하지 않는다.")
+    @Test
+    void duplicateRequestUrlAfterLimitTime() throws InterruptedException {
+        // given
+        String id = "A7812";
+        String url = "/api/v1/users";
+        interceptor.interceptDuplicateRequest(id, url);
+        Thread.sleep(3000);
+
+        // when & then
+        assertThatCode(() -> interceptor.interceptDuplicateRequest(id, url))
+                .doesNotThrowAnyException();
+    }
 }

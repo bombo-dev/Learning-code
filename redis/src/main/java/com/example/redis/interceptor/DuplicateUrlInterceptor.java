@@ -39,11 +39,12 @@ public class DuplicateUrlInterceptor {
                 }
                 throw new DuplicateUrlException("반복 요청이 들어왔습니다. 현재 요청 수 : " + (count + 1));
             } else {
-                redisTemplate.expire(id, 2000, TimeUnit.MILLISECONDS);
                 urlHash.put(id, url, 1);
             }
         } catch (ExceedUrlRequestException exception) {
             System.out.println("반복된 요청이 5회 발생하여 해당 계정을 블랙리스트에 등록합니다.");
+        } finally {
+            redisTemplate.expire(id, 2000, TimeUnit.MILLISECONDS);
         }
     }
 }
