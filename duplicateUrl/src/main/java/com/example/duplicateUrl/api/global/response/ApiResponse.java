@@ -13,11 +13,11 @@ public record ApiResponse<T>(
         LocalDateTime serverTime
 ) {
 
-    public <E> ApiResponse<E> ok(E data) {
+    public static <E> ApiResponse<E> ok(E data) {
         return new ApiResponse<>(200, data, LocalDateTime.now());
     }
 
-    public <E> ApiResponse<E> created(E data) {
+    public static <E> ApiResponse<E> created(E data) {
         return new ApiResponse<>(201, data, LocalDateTime.now());
     }
 }
