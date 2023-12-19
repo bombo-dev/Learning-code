@@ -36,7 +36,9 @@ public class DuplicateRequestInterceptor implements HandlerInterceptor {
         String ip = request.getHeader("X-FORWARDED-FOR") != null ?
                 request.getHeader("X-FORWARDED-FOR") : request.getRemoteAddr();
 
-        log.info("hash hasKey : {}", hashOps.hasKey(BLACKLIST_KEY, ip));
+        if (!redisTemplate.hasKey(ip)) {
+            hashOps.delete(BLACKLIST_KEY, ip);
+        }
 
         if (hashOps.hasKey(BLACKLIST_KEY, ip)) {
             hashOps.put(BLACKLIST_KEY, ip, 0);
