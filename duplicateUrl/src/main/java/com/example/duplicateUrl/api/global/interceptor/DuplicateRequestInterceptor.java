@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -38,8 +36,10 @@ public class DuplicateRequestInterceptor implements HandlerInterceptor {
         String ip = request.getHeader("X-FORWARDED-FOR") != null ?
                 request.getHeader("X-FORWARDED-FOR") : request.getRemoteAddr();
 
+        log.info("hash hasKey : {}", hashOps.hasKey(BLACKLIST_KEY, ip));
+
         if (hashOps.hasKey(BLACKLIST_KEY, ip)) {
-            log.info("==== 해당 시점으로 연결 ====");
+            hashOps.put(BLACKLIST_KEY, ip, 0);
             redisTemplate.expire(ip, 10000, TimeUnit.MILLISECONDS);
             throw new ExceedRequestException("비정상적인 요청이 감지되었습니다. 잠시 후에 다시 시도해주세요.");
         }
