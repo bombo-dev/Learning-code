@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .tag {
+    display: inline-block;
+    background-color: pink;
+  }
+</style>
+<body>
+  <div class="tag">
+    Window Size
+  </div>
+  <script>
+    const tag = document.querySelector('.tag');
+    window.addEventListener('resize', () => {
+      tag.innerHTML =  `
+      window.screen: ${window.screen.width}, ${window.screen.height} <br/>
+      window.outer: ${window.screen.width}, ${window.screen.height} <br/>
+      window.inner: ${window.screen.width}, ${window.screen.height} <br/>
+      window.screen: ${window.screen.width}, ${window.screen.height} 
+    })
+  </script>
+</body>
+</html>
