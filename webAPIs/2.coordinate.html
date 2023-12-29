@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    background-color: black;
+  }
+
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: bisque;
+    margin-top: 3px;
+  }
+
+  .special {
+    background-color: orange;
+  }
+
+  aside {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+  }
+</style>
+<body>
+  <div id='box1' class='box'></div>
+  <div id='box2' class='box'></div>
+  <div id='box3' class='box'></div>
+  <div id='box4' class='box'></div>
+  <div id='box5' class='box'></div>
+  <div id='box6' class='box'></div>
+  <div id='box7' class='box special'></div>
+  <div id='box8' class='box'></div>
+  <div id='box9' class='box'></div>
+  <div id='box10' class='box'></div>
+  <aside>
+    <button class="scroll-by">Scroll by 100px(y)</button>
+    <button class="scroll-to">Scroll to 100px(y)</button>
+    <button class="scroll-into">Scroll into special</button>
+  </aside>
+</body>
+<script>
+  const special = document.querySelector('.special');
+
+  // 클릭된 이벤트로부터 client와 Page의 좌표를 가지고 올 수 있다.
+  special.addEventListener('click', (e) => {
+    const elementSize = special.getBoundingClientRect();
+    console.log(elementSize);
+    console.log(`client x : ${e.clientX}, client y : ${e.clientY}`);
+    console.log(`page x : ${e.pageX}, page y : ${e.pageY}`);
+  })
+  
+  const by = document.querySelector('.scroll-by');
+  const to = document.querySelector('.scroll-to');
+  const into = document.querySelector('.scroll-into');
+
+  by.addEventListener('click', () => {
+    window.scrollBy({
+      top: 10,
+      behavior: "smooth"
+    });
+  })
+
+  to.addEventListener('click', () => {
+    window.scrollTo(0, 100);
+  })
+
+  into.addEventListener('click', () => {
+    special.scrollIntoView(); // 해당 방법이 간편함
+    let position = special.getBoundingClientRect();
+    // window.scrollTo(0, position.y + window.pageYOffset);
+  })
+</script>
+</html>

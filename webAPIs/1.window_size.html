@@ -9,6 +9,9 @@
   .tag {
     display: inline-block;
     background-color: pink;
+    padding: 16px;
+    margin-top: 16px;
+    font-size: 48px;
   }
 </style>
 <body>
@@ -16,14 +19,33 @@
     Window Size
   </div>
   <script>
+    // Window는 DOM 문서를 담은 전체 창을 의미
+    // Document는 브라우저가 불러온 웹 페이지를 나타냄.
+    // ViewPort는 브라우저가 웹 페이지를 그리는 뷰포트. 예시로 핀치 동작을 통해 사이트의 콘텐츠를 확대 했을 때 레이아웃 뷰포트는 변하지 않지만, 시각적 뷰포트는 업데이트 됨.
+    // Navigator는 주로 장치 정보들을 담고 있음.
+
+    // Element의 Size를 항상 가지고 올 수 있음.
+    // Element.getBoundingClientRect()를 통해서 가능
+    // 해당 값은 ViewPort 기준이므로 스크롤에 따라 값이 다르게 나옴.
+    // Element.getBoundingClientRect().x + window.pageXOffset 를 하면 절대 위치를 가져 올 수 있음.
+    // 단 left, top 은 기존 css와 동일하나, right, bottom이 css에서는 오른쪽, 하단 기준인것에 반해 webApis 에서는 무조건 좌상단이 기준
+
+    // Client는 현재 보고있는 화면에서의 사이즈를 의미하고, Page는 전체 페이지의 사이즈를 의미한다.
     const tag = document.querySelector('.tag');
-    window.addEventListener('resize', () => {
-      tag.innerHTML =  `
+
+    function updateResize() {
+      tag.innerHTML = `
       window.screen: ${window.screen.width}, ${window.screen.height} <br/>
-      window.outer: ${window.screen.width}, ${window.screen.height} <br/>
-      window.inner: ${window.screen.width}, ${window.screen.height} <br/>
-      window.screen: ${window.screen.width}, ${window.screen.height} 
+      window.outer: ${window.outerWidth}, ${window.outerHeight} <br/>
+      window.inner: ${window.innerWidth}, ${window.innerHeight} <br/>
+      documentElement: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+      ` 
+    }
+    window.addEventListener('resize', () => {
+      updateResize();
     })
+
+    updateResize();
   </script>
 </body>
 </html>
