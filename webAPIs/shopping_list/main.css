@@ -7,6 +7,24 @@ body {
   text-align: center;
 }
 
+.header {
+  height: 48px;
+  padding: 8px;
+  font-size: 24px;
+  background: rgba(237, 193, 211);
+  background: linear-gradient(
+    166deg,
+    rgba(237, 193, 211, 1) 0%,
+    rgba(219, 192, 216, 1) 35%,
+    rgba(127, 188, 242, 1) 100%
+  );
+  border-radius: 20px 20px 0 0;
+}
+
+.header__name {
+  margin: 0;
+}
+
 .list {
   width: 400px;
   margin: auto;
@@ -20,7 +38,7 @@ body {
   background-color: gainsboro;
 }
 
-.item__row {
+.item {
   display: flex;
   justify-content: space-between;
   padding: 8px 32px;
@@ -44,24 +62,6 @@ body {
   height: 1px;
   margin: auto;
   background-color: grey;
-}
-
-.header {
-  height: 48px;
-  padding: 8px;
-  font-size: 24px;
-  background: rgba(237, 193, 211);
-  background: linear-gradient(
-    166deg,
-    rgba(237, 193, 211, 1) 0%,
-    rgba(219, 192, 216, 1) 35%,
-    rgba(127, 188, 242, 1) 100%
-  );
-  border-radius: 20px 20px 0 0;
-}
-
-.header__name {
-  margin: 0;
 }
 
 .footer {
