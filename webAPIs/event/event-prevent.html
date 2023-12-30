@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 250px;
+        height: 250px;
+        background-color: yellow;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="checkbox" />
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+      // options에서 passive를 false 로 주면 해결되지만, passive한 event들을 직접 false로 주는 것은 좋지 않음.
+      document.addEventListener('wheel', event => {
+        console.log('scrolling');
+        event.preventDefault();
+      });
+      const checkbox = document.querySelector('input');
+      checkbox.addEventListener('click', event => {
+        // long
+        console.log('checked');
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>
