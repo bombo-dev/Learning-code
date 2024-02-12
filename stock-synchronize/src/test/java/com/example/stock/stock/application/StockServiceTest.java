@@ -64,7 +64,7 @@ class StockServiceTest {
         int threadCount = 100;
 
         // 비동기로 요청을 쏠 수 있게 해주는 자바의 API
-        ExecutorService executorService = Executors.newFixedThreadPool(32);
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
 
         // 다른 쓰레드에서 실행중인 작업이 완료될 때까지 대기할 수 있도록 도와주는 클래스
         // 좀 더 조사해보자.
@@ -81,6 +81,7 @@ class StockServiceTest {
             });
         }
         countDownLatch.await();
+        executorService.shutdown();
         Stock stock = stockRepository.findById(1L).get();
 
         // then

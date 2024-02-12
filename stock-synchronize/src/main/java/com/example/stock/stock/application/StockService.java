@@ -1,6 +1,5 @@
 package com.example.stock.stock.application;
 
-import com.example.stock.stock.aop.ExecuteTime;
 import com.example.stock.stock.domain.Stock;
 import com.example.stock.stock.repository.StockRepository;
 import org.springframework.stereotype.Service;
@@ -15,9 +14,9 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-//    @Transactional
-    public synchronized void decreaseStock(Long id, Long quantity) {
-        Stock stock = stockRepository.findById(id)
+    @Transactional
+    public void decreaseStock(Long id, Long quantity) {
+        Stock stock = stockRepository.findByIdWithPessimisticLock(id)
                 .orElseThrow();
 
         stock.decrease(quantity);
