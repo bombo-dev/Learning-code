@@ -2,26 +2,29 @@ package com.example.stock.stock.application;
 
 import com.example.stock.stock.domain.Stock;
 import com.example.stock.stock.repository.StockRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.util.StopWatch;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 class StockServiceTest {
+
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private StockService stockService;
@@ -54,8 +57,10 @@ class StockServiceTest {
 
     @DisplayName("동시에 100개의 요청")
     @Test
-    void test() throws InterruptedException {
+    void decrease100() throws InterruptedException {
         // given
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         int threadCount = 100;
 
         // 비동기로 요청을 쏠 수 있게 해주는 자바의 API
@@ -76,10 +81,11 @@ class StockServiceTest {
             });
         }
         countDownLatch.await();
-
         Stock stock = stockRepository.findById(1L).get();
 
         // then
+        stopWatch.stop();
+        log.info("걸린 시간 {} ms", stopWatch.getTotalTimeMillis());
         assertThat(stock.getQuantity()).isEqualTo(0);
     }
 }
