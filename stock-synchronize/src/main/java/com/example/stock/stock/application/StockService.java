@@ -15,12 +15,19 @@ public class StockService {
     }
 
     @Transactional
-    public void decreaseStock(Long id, Long quantity) {
-        Stock stock = stockRepository.findByIdWithPessimisticLock(id)
-                .orElseThrow();
+    public void decreaseStock(Long id, Long quantity) throws InterruptedException {
+        while (true) {
+            try {
+                Stock stock = stockRepository.findByIdWithPessimisticLock(id)
+                        .orElseThrow();
 
-        stock.decrease(quantity);
-        stockRepository.save(stock);
+                stock.decrease(quantity);
+                stockRepository.save(stock);
+                break;
+            } catch (Exception e) {
+                Thread.sleep(50);
+            }
+        }
     }
 
 }

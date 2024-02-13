@@ -47,7 +47,7 @@ class StockServiceTest {
 
     @DisplayName("재고를 감소시킨다.")
     @Test
-    void decrease() {
+    void decrease() throws InterruptedException {
         // given
         stockService.decreaseStock(1L, 1L);
 
@@ -70,7 +70,6 @@ class StockServiceTest {
         ExecutorService executorService = Executors.newFixedThreadPool(8);
 
         // 다른 쓰레드에서 실행중인 작업이 완료될 때까지 대기할 수 있도록 도와주는 클래스
-        // 좀 더 조사해보자.
         CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
         // when
@@ -78,6 +77,8 @@ class StockServiceTest {
             executorService.submit(() -> {
                 try {
                     stockService.decreaseStock(1L, 1L);
+                } catch (Exception e) {
+                    throw new RuntimeException();
                 } finally {
                     countDownLatch.countDown();
                 }
@@ -93,7 +94,7 @@ class StockServiceTest {
         assertThat(stock.getQuantity()).isEqualTo(0);
     }
 
-    @DisplayName("동시에 100개의 요청 - 낙관적 락")
+    @DisplayName("동시에 100개의 요청 - 낙관적 락 퍼사드")
     @Test
     void decrease100ByOptimistic() throws InterruptedException {
         // given
