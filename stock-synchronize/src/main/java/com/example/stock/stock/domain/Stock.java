@@ -2,6 +2,7 @@ package com.example.stock.stock.domain;
 
 import jakarta.persistence.*;
 
+@Table(name = "stock")
 @Entity
 public class Stock {
 
@@ -9,6 +10,7 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
     private Long productId;
 
     private Long quantity;
@@ -29,6 +31,10 @@ public class Stock {
         }
 
         this.quantity -= quantity;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Long getQuantity() {
