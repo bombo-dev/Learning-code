@@ -1,4 +1,4 @@
-package com.group.libraryapp.dto.book.request;
+package com.group.libraryapp.loan.adapter.in.web.dto;
 
 public class BookReturnRequest {
 

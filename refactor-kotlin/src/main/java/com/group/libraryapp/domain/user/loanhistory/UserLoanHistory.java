@@ -1,6 +1,6 @@
 package com.group.libraryapp.domain.user.loanhistory;
 
-import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.user.domain.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

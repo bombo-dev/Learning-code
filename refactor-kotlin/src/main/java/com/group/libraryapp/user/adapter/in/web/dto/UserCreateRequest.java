@@ -1,4 +1,4 @@
-package com.group.libraryapp.dto.user.request;
+package com.group.libraryapp.user.adapter.in.web.dto;
 
 public class UserCreateRequest {
 

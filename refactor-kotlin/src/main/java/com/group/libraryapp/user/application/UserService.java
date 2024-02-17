@@ -1,10 +1,10 @@
-package com.group.libraryapp.service.user;
+package com.group.libraryapp.user.application;
 
-import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.user.domain.User;
 import com.group.libraryapp.domain.user.UserRepository;
-import com.group.libraryapp.dto.user.request.UserCreateRequest;
-import com.group.libraryapp.dto.user.request.UserUpdateRequest;
-import com.group.libraryapp.dto.user.response.UserResponse;
+import com.group.libraryapp.user.adapter.in.web.dto.UserCreateRequest;
+import com.group.libraryapp.user.adapter.in.web.dto.UserUpdateRequest;
+import com.group.libraryapp.user.application.port.out.dto.UserResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ public class UserService {
 
   @Transactional
   public void saveUser(UserCreateRequest request) {
-    User newUser = new User(request.getName(), request.getAge());
+    User newUser = User.createNewUser(request.getName(), request.getAge());
     userRepository.save(newUser);
   }
 

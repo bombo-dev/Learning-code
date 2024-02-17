@@ -1,6 +1,6 @@
-package com.group.libraryapp.dto.user.response;
+package com.group.libraryapp.user.application.port.out.dto;
 
-import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.user.domain.User;
 
 public class UserResponse {
 
