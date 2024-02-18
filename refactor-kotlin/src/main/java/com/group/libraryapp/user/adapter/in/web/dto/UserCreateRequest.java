@@ -1,5 +1,7 @@
 package com.group.libraryapp.user.adapter.in.web.dto;
 
+import com.group.libraryapp.user.application.port.in.dto.UserCreateCommand;
+
 public class UserCreateRequest {
 
   private String name;
@@ -13,4 +15,7 @@ public class UserCreateRequest {
     return age;
   }
 
+  public UserCreateCommand toCommand() {
+    return new UserCreateCommand(name, age);
+  }
 }

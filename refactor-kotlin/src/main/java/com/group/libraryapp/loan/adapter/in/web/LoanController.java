@@ -17,13 +17,13 @@ public class LoanController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/book/loan")
-    public void loanBook(@RequestBody BookLoanRequest request) {
-        bookService.loanBook(request);
-    }
-
-    @PutMapping("/book/return")
-    public void returnBook(@RequestBody BookReturnRequest request) {
-        bookService.returnBook(request);
-    }
+//    @PostMapping("/book/loan")
+//    public void loanBook(@RequestBody BookLoanRequest request) {
+//        bookService.loanBook(request);
+//    }
+//
+//    @PutMapping("/book/return")
+//    public void returnBook(@RequestBody BookReturnRequest request) {
+//        bookService.returnBook(request);
+//    }
 }

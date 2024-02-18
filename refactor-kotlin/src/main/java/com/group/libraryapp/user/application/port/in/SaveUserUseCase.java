@@ -4,5 +4,5 @@ import com.group.libraryapp.user.application.port.in.dto.UserCreateCommand;
 
 public interface SaveUserUseCase {
 
-    void saveUser(UserCreateCommand command);
+    Long saveUser(UserCreateCommand command);
 }

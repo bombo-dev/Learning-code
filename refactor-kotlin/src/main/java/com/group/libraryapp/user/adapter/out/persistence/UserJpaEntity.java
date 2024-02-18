@@ -20,11 +20,21 @@ public class UserJpaEntity {
 
     }
 
-    public UserJpaEntity(String name, Integer age) {
-        if (name.isBlank()) {
-            throw new IllegalArgumentException("이름은 비어 있을 수 없습니다");
-        }
+    public UserJpaEntity(Long id, String name, Integer age) {
+        this.id = id;
         this.name = name;
         this.age = age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 }

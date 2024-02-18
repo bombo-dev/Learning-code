@@ -1,11 +1,13 @@
 package com.group.libraryapp.user.application.port.in.dto;
 
 import com.group.libraryapp.global.validator.SelfValidator;
-import com.group.libraryapp.user.domain.User;
 
 import javax.validation.constraints.NotNull;
 
-public class UserCreateCommand extends SelfValidator<UserCreateCommand> {
+public class UserUpdateCommand extends SelfValidator<UserUpdateCommand> {
+
+    @NotNull
+    private final Long id;
 
     @NotNull
     private final String name;
@@ -13,10 +15,15 @@ public class UserCreateCommand extends SelfValidator<UserCreateCommand> {
     @NotNull
     private final Integer age;
 
-    public UserCreateCommand(String name, Integer age) {
+    public UserUpdateCommand(Long id, String name, Integer age) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.validateSelf();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -25,9 +32,5 @@ public class UserCreateCommand extends SelfValidator<UserCreateCommand> {
 
     public Integer getAge() {
         return age;
-    }
-
-    public User toDomain() {
-        return User.createNewUser(name, age);
     }
 }

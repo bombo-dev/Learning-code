@@ -1,11 +1,9 @@
 package com.group.libraryapp.domain.user.loanhistory;
 
-import com.group.libraryapp.user.domain.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -16,8 +14,7 @@ public class UserLoanHistory {
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  @ManyToOne
-  private User user;
+  private Long userId;
 
   private String bookName;
 
@@ -27,8 +24,8 @@ public class UserLoanHistory {
 
   }
 
-  public UserLoanHistory(User user, String bookName, boolean isReturn) {
-    this.user = user;
+  public UserLoanHistory(Long userId, String bookName, boolean isReturn) {
+    this.userId = userId;
     this.bookName = bookName;
     this.isReturn = isReturn;
   }
