@@ -38,3 +38,15 @@ class Calculator(number: Int) {
 ## 클래스 직접 명시
 코틀린에서는 자바에 있는 클래스를 인자로 전달 할 때
 `IllegalArgumentException.class` 처럼 전달해야 하는 것이 아니라, `IllegalArgumentException::class.java` 처럼 전달해주어야 한다.
+따라서, 테스트 코드는 아래와 같이 된다.
+```kotlin
+assertThatThrownBy { calculator.divide(0) } // 매개변수가 없는 람다는 () 를 제거하여 표현 할 수 있다.
+    .isInstanceOf(IllegalArgumentException::class.java)
+    .hasMessage(message)
+```
+```kotlin
+assertThrows<IllegalArgumentException> {
+    calculator.divide(0)
+}
+```
+위와 같이 표현도 가능하다.

@@ -3,6 +3,7 @@ package com.group.libraryapp.calculator
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 
 class CalculatorTest {
@@ -52,6 +53,17 @@ class CalculatorTest {
         assertThatThrownBy { calculator.divide(0) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("0으로 나눌 수 없습니다.")
+    }
+
+    @Test
+    fun divideWithZero2() {
+        // given
+        val calculator = Calculator(5)
+
+        // when & then
+        assertThrows<IllegalArgumentException> {
+            calculator.divide(0)
+        }
     }
 
     @Test
