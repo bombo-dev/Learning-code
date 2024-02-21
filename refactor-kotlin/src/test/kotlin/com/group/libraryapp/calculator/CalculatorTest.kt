@@ -61,9 +61,11 @@ class CalculatorTest {
         val calculator = Calculator(5)
 
         // when & then
-        assertThrows<IllegalArgumentException> {
+        val message = assertThrows<IllegalArgumentException> {
             calculator.divide(0)
-        }
+        }.message
+
+        assertThat(message).isEqualTo("0으로 나눌 수 없습니다.");
     }
 
     @Test
