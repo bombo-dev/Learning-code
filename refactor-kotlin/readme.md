@@ -98,3 +98,9 @@ assertThat(results[0].age).isNull()
 ## tuple
 객체의 다중 컬럼을 조회할 때 extracting을 활용하곤 한다. 이때 tuple은 여러 결과를 조회하는데 용이하게 사용 될 수 있다.  
 단일 결과가 나오는 것으로 예상되는 테스트에 대해서 tuple을 사용하면 예외가 발생한다.
+
+# Kotlin Entity 생성
+- Jpa Entity는 프록시로 생성이 되어진다. 그리고 기본 생성자를 요구한다.
+- primary 생성자를 만들고 secondary 생성자가 primary 생성자를 오버라이딩 하는 방식을 택해야 한다. (하지만 너무 더럽..)
+- 이를 해결해주기 위해 다음과 같은 플러그인을 추가해주어야 한다. `id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'`
+- 다음으로 리플렉션을 해주기 위한 의존성을 추가해주어야 한다. `implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'`
