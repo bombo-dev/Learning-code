@@ -32,3 +32,16 @@
 
 ### data Stream, propagation of change
 - 데이터가 지속적으로 흐르는 것을 이벤트로 보고 이러한 **이벤트를 발생시키면서 데이터를 전달**하는 것
+
+## 리액티브 프로그래밍 구성
+
+### Publisher
+- **입력으로 들어오는 데이터를 제공**하는 역할을 수행한다.
+### Subscriber
+- **Publisher가 제공하는 데이터를 전달받아서 사용하는 주체**이다. **Consumer** 라고 하기도 한다.
+### Data Source
+- 입력으로 들어오는 데이터를 대표하는 용어이다. Data Stream 이라고도 한다.
+- Data Source를 주로 **데이터의 원천**(최초로 생성된 데이터), Data Stream을 **Publisher의 입력으로 들어오는 데이터의 형태를 의미**한다.
+### Operator
+- Publisher로부터 전달된 데이터가 **Subscriber에게 데이터를 전달하기 전에 데이터를 가공하는 역할**을 한다.
+- 자바의 스트림 혹은 코틀린의 시퀀스의 중간 연산자와 유사하다.
