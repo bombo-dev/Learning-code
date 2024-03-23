@@ -1,4 +1,4 @@
-package com.bombo.configuration;
+package com.bombo.configuration.autoconfiguration;
 
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;

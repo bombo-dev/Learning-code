@@ -1,4 +1,4 @@
-package com.bombo.configuration;
+package com.bombo.configuration.autoconfiguration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

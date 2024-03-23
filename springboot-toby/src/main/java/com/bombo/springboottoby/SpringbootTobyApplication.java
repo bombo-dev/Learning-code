@@ -1,5 +1,6 @@
 package com.bombo.springboottoby;
 
+import com.bombo.configuration.MySpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootApplication
