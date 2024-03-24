@@ -1,6 +1,7 @@
 package com.bombo.configuration;
 
 import com.bombo.configuration.autoconfiguration.DispatcherServletConfiguration;
+import com.bombo.configuration.autoconfiguration.EnableSelectImporterAutoConfiguration;
 import com.bombo.configuration.autoconfiguration.TomcatWebServerConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +11,6 @@ import org.springframework.context.annotation.Import;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import({DispatcherServletConfiguration.class, TomcatWebServerConfiguration.class})
+@Import(EnableSelectImporterAutoConfiguration.class)
 public @interface EnableMyAutoConfiguration {
 }
