@@ -1,6 +1,5 @@
 package com.bombo.configuration;
 
-import com.bombo.configuration.EnableMyAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
