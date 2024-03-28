@@ -1,5 +1,6 @@
 package com.bombo.configuration.autoconfiguration;
 
+import com.bombo.configuration.ConditionalMyOnClass;
 import com.bombo.configuration.MyAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
@@ -11,19 +12,11 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.ClassUtils;
 
 @MyAutoConfiguration
-@Conditional(TomcatWebServerConfiguration.TomcatCondition.class)
+@ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
 public class TomcatWebServerConfiguration {
 
     @Bean("tomcatWebServerFactory")
     public ServletWebServerFactory servletWebServerFactory() {
         return new TomcatServletWebServerFactory();
-    }
-
-    static class TomcatCondition implements Condition {
-
-        @Override
-        public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return ClassUtils.isPresent("org.apache.catalina.startup.Tomcat", context.getClassLoader());
-        }
     }
 }

@@ -1,5 +1,6 @@
 package com.bombo.configuration.autoconfiguration;
 
+import com.bombo.configuration.ConditionalMyOnClass;
 import com.bombo.configuration.MyAutoConfiguration;
 import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -12,19 +13,11 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.ClassUtils;
 
 @MyAutoConfiguration
-@Conditional(JettyWebServerConfiguration.JettyCondition.class)
+@ConditionalMyOnClass("org.eclipse.jetty.server.Server")
 public class JettyWebServerConfiguration {
 
     @Bean("jettyWebServerFactory")
     public ServletWebServerFactory servletWebServerFactory() {
         return new JettyServletWebServerFactory();
-    }
-
-    static class JettyCondition implements Condition {
-
-        @Override
-        public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return ClassUtils.isPresent("org.eclipse.jetty.server.Server", context.getClassLoader());
-        }
     }
 }
