@@ -1,4 +1,4 @@
-com.bombo.configuration.autoconfiguration.ServerPropertiesConfiguration
+com.bombo.configuration.autoconfiguration.PropertyPostProcessorConfiguration
 com.bombo.configuration.autoconfiguration.PropertyPlaceHolderConfiguration
 com.bombo.configuration.autoconfiguration.TomcatWebServerConfiguration
 com.bombo.configuration.autoconfiguration.JettyWebServerConfiguration
