@@ -1,3 +1,4 @@
+com.bombo.configuration.autoconfiguration.PropertyPlaceHolderConfiguration
 com.bombo.configuration.autoconfiguration.TomcatWebServerConfiguration
 com.bombo.configuration.autoconfiguration.JettyWebServerConfiguration
 com.bombo.configuration.autoconfiguration.DispatcherServletConfiguration
