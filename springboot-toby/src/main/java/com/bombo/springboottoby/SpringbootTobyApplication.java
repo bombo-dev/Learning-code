@@ -1,6 +1,7 @@
 package com.bombo.springboottoby;
 
 import com.bombo.configuration.MySpringBootApplication;
+import javax.sql.DataSource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
