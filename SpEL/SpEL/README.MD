@@ -129,6 +129,21 @@ Java Bean 패턴에 따라 필드의 접근 제어자를 private로 수정하고
 ```
 ![img.png](static/img/img3.png)
 SpEL은 Java Bean 표준을 준수하며, getter를 통해 필드에 접근할 수 있습니다.
+그럼 객체 내의 객체에도 접근 할 수 있을지 살펴보겠습니다.
+
+```java
+    @DisplayName("Dot Notation으로 객체 내의 객체에도 접근 할 수 있다.")
+    @Test
+    void access_inner_object() {
+        String expectedValue = "Hello";
+
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        String result = (String) spelExpressionParser.parseExpression("new com.bombo.spel.Foo2(new com.bombo.spel.Foo('Hello')).foo.dummy").getValue();
+        Assertions.assertThat(result).isEqualTo(expectedValue);
+    }
+```
+![img.png](static/img/img5.png)
+동일하게 접근 가능함을 확인 할 수 있었습니다.
 
 추가적으로, 클래스 타입을 명시하여 캐스팅을 제거 할 수 있다고 하여 시도해봤습니다.
 ```java
