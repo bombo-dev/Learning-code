@@ -1,10 +1,14 @@
 package com.bombo.spel;
 
+import com.bombo.spel.demo.PlaceOfBirth;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
+import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.SpelParseException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.SimpleEvaluationContext;
 
 class SpELTest {
 
@@ -63,5 +67,43 @@ class SpELTest {
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
         String result = spelExpressionParser.parseExpression("new com.bombo.spel.Foo('Hello').dummy").getValue(String.class);
         Assertions.assertThat(result).isEqualTo(expectedValue);
+    }
+
+    @DisplayName("Literal Expression에 홑 따옴표를 사용 할 수 있다.")
+    @Test
+    void expression_special_character() {
+        String expectedValue = "Bombo's test code!";
+
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        String result = spelExpressionParser.parseExpression("'Bombo''s test code!'").getValue(String.class);
+        Assertions.assertThat(result).isEqualTo(expectedValue);
+    }
+
+    @DisplayName("SimpleEvaluationContext의 forReadOnlyDataBinding을 사용하면 데이터 바인딩을 읽기 전용으로 설정 할 수 있다.")
+    @Test
+    void expression_direct_read_only_access() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        SimpleEvaluationContext context = SimpleEvaluationContext.forReadOnlyDataBinding().build();
+
+        PlaceOfBirth placeOfBirth = new PlaceOfBirth("Seoul", "Korea");
+
+        Assertions.assertThatThrownBy(() -> {
+            spelExpressionParser.parseExpression("city").setValue(context, placeOfBirth, "Busan");
+        }).isInstanceOf(SpelEvaluationException.class);
+
+        Assertions.assertThat(placeOfBirth.getCity()).isEqualTo("Seoul");
+    }
+
+    @DisplayName("SimpleEvaluationContext의 forReadWriteDataBinding을 사용하면 데이터 바인딩을 읽기와 쓰기 전용으로 설정 할 수 있다.")
+    @Test
+    void expression_direct_all_access() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        SimpleEvaluationContext context = SimpleEvaluationContext.forReadWriteDataBinding().build();
+
+        PlaceOfBirth placeOfBirth = new PlaceOfBirth("Seoul", "Korea");
+
+        spelExpressionParser.parseExpression("city").setValue(context, placeOfBirth, "Busan");
+
+        Assertions.assertThat(placeOfBirth.getCity()).isEqualTo("Busan");
     }
 }

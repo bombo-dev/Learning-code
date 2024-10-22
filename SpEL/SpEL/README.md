@@ -2,10 +2,10 @@
 
 ## 1. SpEL
 SpEL은 런타임에 객체 그래프의 쿼리 및 조작을 지원하는 표현 언어입니다.
-org.springframework.expression package 가 제공해준다.
+org.springframework.expression package 가 제공해줍니다.
 
 ExpressionParser 인터페이스는 표현식 문자열을 구문 분석하는 역할을 합니다.
-표현식 문자열은 작은 따옴표로 표시된 문자열 리터럴로 작성해야 한다.
+표현식 문자열은 작은 따옴표로 표시된 문자열 리터럴로 작성해야 합니다.
 
 ```java
 ExpressionParser parser = new SpelExpressionParser();
@@ -19,10 +19,8 @@ String message = (String) exp.getValue(); // 'Hello World!'
     public void not_single_quotation_marks() {
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
 
-        Assertions.assertThatThrownBy(() -> {
-                    spelExpressionParser.parseExpression("Hello, World!");
-                }
-        ).isInstanceOf(SpelParseException.class);
+        Assertions.assertThatThrownBy(() -> spelExpressionParser.parseExpression("Hello, World!"))
+                .isInstanceOf(SpelParseException.class);
     }
 
     @DisplayName("작은 따옴표가 있으면 정상적으로 처리된다.")
@@ -41,7 +39,7 @@ String message = (String) exp.getValue(); // 'Hello World!'
         Assertions.assertThat(length).isEqualTo(13);
     }
 ```
-![img.png](static/img/img.png)
+![img.png](static/img/img.png)  
 SpEL은 dot notation (prop1.prop2.prop3)을 사용하여 중첩된 속성과 해당 속성 값 설정을 지원합니다.
 
 해당 내용을 보고 객체를 직접 생성해봤으나 다음과 같은 오류를 마주하였습니다.
@@ -108,7 +106,7 @@ public class Foo {
     }
 }
 ```
-![img.png](static/img/img2.png)
+![img.png](static/img/img2.png)  
 테스트가 정상적으로 통과합니다.
 
 하지만, 필드를 public으로 노출시키는 것은 좋지 않아 보입니다.
@@ -127,7 +125,7 @@ Java Bean 패턴에 따라 필드의 접근 제어자를 private로 수정하고
         }
     }
 ```
-![img.png](static/img/img3.png)
+![img.png](static/img/img3.png)  
 SpEL은 Java Bean 표준을 준수하며, getter를 통해 필드에 접근할 수 있습니다.
 그럼 객체 내의 객체에도 접근 할 수 있을지 살펴보겠습니다.
 
@@ -142,7 +140,7 @@ SpEL은 Java Bean 표준을 준수하며, getter를 통해 필드에 접근할 �
         Assertions.assertThat(result).isEqualTo(expectedValue);
     }
 ```
-![img.png](static/img/img5.png)
+![img.png](static/img/img5.png)  
 동일하게 접근 가능함을 확인 할 수 있었습니다.
 
 추가적으로, 클래스 타입을 명시하여 캐스팅을 제거 할 수 있다고 하여 시도해봤습니다.
@@ -151,11 +149,27 @@ SpEL은 Java Bean 표준을 준수하며, getter를 통해 필드에 접근할 �
     @Test
     void expression_getValue_include_classType() {
         String expectedValue = "Hello";
-
+ 
         SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
         String result = spelExpressionParser.parseExpression("new com.bombo.spel.Foo('Hello').dummy").getValue(String.class);
         Assertions.assertThat(result).isEqualTo(expectedValue);
     }
 ```
-![img.png](static/img/img4.png)
+![img.png](static/img/img4.png)  
 테스트가 통과되었습니다. 상황에 따라서 적절하게 형변환을 제거 할 수 있을 것 같습니다.
+
+## EvaluationContext
+
+EvaluationContext는 표현식을 평가하는 데 사용되는 컨텍스트 입니다.  
+구현체는 두 가지가 존재합니다.
+- StandardEvaluationContext
+- SimpleEvaluationContext
+
+StandardEvaluationContext는 SpEL의 기본 구현체이며, 빈 등록, 함수 등록, 프로퍼티 설정 등을 지원합니다. 
+실제로도 내부 설명을 보면 **"속성, 메서드 및 필드를 확인하기 위해 리플렉션을 기반으로 적용 가능한 모든 전략의 표준 구현을 사용합니다."**  
+라고 작성이 되어있습니다. 하지만, 상황에 따라 다르게 동작하기를 원할 수도 있는 상황에서는 SimpleEvaluationContext를 사용할 수 있습니다.
+
+- 읽기 전용 평가 : `SimpleEvaluationContext.forReadOnlyDataBinding().build();` 
+- 전체 접근 평가 : `SimpleEvaluationContext.forReadWriteDataBinding().build();`  
+
+물론, property에 접근하도록 되어 있는 형식이기에 public Getter, Setter가 열려있거나, public 필드여야 합니다.
