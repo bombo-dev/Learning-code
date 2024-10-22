@@ -4,11 +4,14 @@ import com.bombo.spel.demo.PlaceOfBirth;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.ParserContext;
+import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.expression.spel.SpelParseException;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.SimpleEvaluationContext;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 class SpELTest {
 
@@ -105,5 +108,52 @@ class SpELTest {
         spelExpressionParser.parseExpression("city").setValue(context, placeOfBirth, "Busan");
 
         Assertions.assertThat(placeOfBirth.getCity()).isEqualTo("Busan");
+    }
+
+    @DisplayName("T 타입은 Class 유형의 인스턴스를 지정 할 수 있다.")
+    @Test
+    void expression_t_type() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+
+        Class value = spelExpressionParser.parseExpression("T(java.lang.Math)").getValue(Class.class);
+        Assertions.assertThat(value).isEqualTo(Math.class);
+
+        Class mathClass = spelExpressionParser.parseExpression("T(Math)").getValue(Class.class);
+        Assertions.assertThat(mathClass).isEqualTo(Math.class);
+    }
+
+    @DisplayName("#을 사용하여 변수를 지정 할 수 있다.")
+    @Test
+    void expression_variable() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        SimpleEvaluationContext context = SimpleEvaluationContext.forReadWriteDataBinding().build();
+
+        context.setVariable("name", "Bombo");
+        String result = spelExpressionParser.parseExpression("#name").getValue(context, String.class);
+        Assertions.assertThat(result).isEqualTo("Bombo");
+    }
+
+    @DisplayName("#{} 으로 내부의 표현식을 평가하여 결과로 노출 할 수 있다.")
+    @Test
+    void expression_inner_expression() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        String result = spelExpressionParser.parseExpression("Hello World To SubString (0, 5) : #{'Hello World'.substring(0, 5)}", new TemplateParserContext()).getValue(String.class);
+
+        Assertions.assertThat(result).isEqualTo("Hello World To SubString (0, 5) : Hello");
+    }
+
+    @DisplayName("#{T()}로 정적 메서드를 호출 할 수 있다.")
+    @Test
+    void expression_static_method() {
+        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+        EvaluationContext standardContext = new StandardEvaluationContext();
+
+        Double result = spelExpressionParser.parseExpression("#{T(java.lang.Math).random()}", new TemplateParserContext()).getValue(Double.class);
+
+        Assertions.assertThatThrownBy(() -> spelExpressionParser.parseExpression("#{T(java.lang.Math).random()}").getValue(standardContext, Double.class))
+                        .isInstanceOf(SpelParseException.class);
+
+
+        Assertions.assertThat(result).isNotNull();
     }
 }
