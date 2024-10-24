@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    kotlin("jvm")
 }
 
 group = "com.bombo"
@@ -9,15 +10,17 @@ repositories {
     mavenCentral()
 }
 
-val SPRING_BOOT_VERISON = "2.7.5"
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-aop:$SPRING_BOOT_VERISON")
-    implementation("org.redisson:redisson-spring-boot-starter:$SPRING_BOOT_VERISON")
+    implementation("org.springframework.boot:spring-boot-starter-aop:2.7.5")
+    implementation("org.redisson:redisson-spring-boot-starter:3.36.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(21)
 }
