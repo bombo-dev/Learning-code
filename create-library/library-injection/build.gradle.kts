@@ -25,6 +25,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    // lombok
+    implementation("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+
     // Distribute Core Library
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
