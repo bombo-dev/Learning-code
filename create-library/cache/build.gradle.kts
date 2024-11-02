@@ -16,6 +16,15 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
+tasks.named<Jar>("jar") {
+    enabled = true
+    archiveClassifier.set("") // 빈 문자열로 설정
+
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) }) // 의존성 포함
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE // 중복 처리
+}
+
 tasks.test {
     useJUnitPlatform()
 }

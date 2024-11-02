@@ -37,11 +37,11 @@ public class DistributedLockAop {
         RLock lock = redissonClient.getLock(key);
 
         try {
-            log.info("lock 획득을 시도합니다. Method : {}, key : {}", method, key);
+            log.debug("try lock acquire. Method : {}, key : {}", method, key);
             boolean isAcquiredLock = lock.tryLock(distributeLockAnnotation.waitTime(), distributeLockAnnotation.leaseTime(), distributeLockAnnotation.timeUnit());
 
             if (!isAcquiredLock) {
-                log.info("lock 획득에 실패했습니다. Method : {}, key : {}", method, key);
+                log.debug("failed lock acquire. Method : {}, key : {}", method, key);
                 return false;
             }
 
@@ -51,9 +51,9 @@ public class DistributedLockAop {
             throw new InterruptedException("Lock acquisition attempt interrupted.");
         } finally {
             try {
-                log.info("lock 해제를 시도합니다. Method : {}, key : {}", method, key);
+                log.debug("try lock release Method : {}, key : {}", method, key);
                 lock.unlock();
-                log.info("lock 해제가 완료되었습니다. Method : {}, key : {}", method, key);
+                log.debug("completed lock release Method : {}, key : {}", method, key);
             } catch (IllegalMonitorStateException e) {
                 log.warn("Redisson Lock Already UnLock. Method : {}, key : {}", method, key);
             }
