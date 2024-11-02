@@ -7,4 +7,6 @@ public interface StockRepository {
     Long save(Stock stock);
 
     Optional<Stock> findById(Long id);
+
+    void deleteAll();
 }

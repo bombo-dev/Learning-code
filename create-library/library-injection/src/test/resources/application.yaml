@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: non-redis
+
+---
+spring:
+  profiles:
+    active: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379

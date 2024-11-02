@@ -34,4 +34,11 @@ public class Stock {
     public Long getCount() {
         return count;
     }
+
+    public void decrease() {
+        if (count == 0) {
+            throw new IllegalStateException("Stock is empty");
+        }
+        count--;
+    }
 }
