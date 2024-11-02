@@ -1,6 +1,7 @@
 plugins {
     id("java")
     kotlin("jvm")
+    id("maven-publish")
 }
 
 group = "com.bombo"
