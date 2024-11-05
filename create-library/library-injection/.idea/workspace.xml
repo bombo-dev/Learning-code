@@ -4,30 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41c1527b-b553-45c4-ab13-9e32265370f8" name="Changes" comment="저장소 생성">
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/8.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/8.5/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/8.5/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/8.5/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/8.5/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/8.5/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/8.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/8.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/annotation/DistributeLock.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/annotation/DistributeLock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/aop/DistributedLockAop.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/aop/DistributedLockAop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/converter/CustomSpELParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/converter/CustomSpELParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/env/PropertyConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/env/PropertyConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/env/RedisProperty.class" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/build/classes/java/main/com/bombo/cache/core/env/RedisProperty.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/src/main/java/com/bombo/cache/core/env/PropertyConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cache/src/main/java/com/bombo/cache/core/env/RedisProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cache/src/main/java/com/bombo/cache/core/env/RedissonConfiguration.java" afterDir="false" />
+    <list default="true" id="41c1527b-b553-45c4-ab13-9e32265370f8" name="Changes" comment="별도의 테스트 추가">
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/cache-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bombo/stock/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bombo/stock/StockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bombo/stock/StockServiceFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bombo/stock/StockServiceFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bombo/stock/domain/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bombo/stock/domain/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bombo/stock/domain/StockInMemoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bombo/stock/domain/StockInMemoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bombo/stock/domain/StockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bombo/stock/domain/StockRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,17 +31,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="library-injection" type="f1a62948:ProjectNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="library-injection" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="library-injection" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -73,9 +41,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -94,39 +62,42 @@
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build library-injection.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.StockServiceFacadeTest.decrease.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.library-injection [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.library-injection [clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;Spring Boot.LibraryInjectionApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/moonjongwn/Documents/002_GITHUB/001_STUDY/Learning-code/create-library/library-injection/src/main/java/com/bombo/stock&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build library-injection.executor": "Run",
+    "Gradle.StockServiceFacadeTest.decrease.executor": "Run",
+    "Gradle.StockServiceFacadeTest.executor": "Run",
+    "Gradle.StockServiceLockFacadeTest.decreaseWithLock.executor": "Run",
+    "Gradle.StockServiceLockFacadeTest.decreaseWithNonLock.executor": "Run",
+    "Gradle.library-injection [build].executor": "Run",
+    "Gradle.library-injection [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "Spring Boot.LibraryInjectionApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/moonjongwn/Documents/002_GITHUB/001_STUDY/Learning-code/create-library/library-injection/libs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/com/bombo/stock" />
       <recent name="$PROJECT_DIR$/libs" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/bombo/stock" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
@@ -140,7 +111,31 @@
       <recent name="com.bombo.stock" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.StockServiceFacadeTest.decrease">
+  <component name="RunManager" selected="Gradle.StockServiceLockFacadeTest.decreaseWithLock">
+    <configuration name="StockServiceFacadeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.bombo.stock.StockServiceFacadeTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="StockServiceFacadeTest.decrease" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -155,6 +150,54 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.bombo.stock.StockServiceFacadeTest.decrease&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StockServiceLockFacadeTest.decreaseWithLock" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.bombo.stock.StockServiceLockFacadeTest.decreaseWithLock&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StockServiceLockFacadeTest.decreaseWithNonLock" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.bombo.stock.StockServiceLockFacadeTest.decreaseWithNonLock&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -187,28 +230,6 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="library-injection [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="LibraryInjectionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="library-injection.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.LibraryInjectionApplication" />
@@ -218,9 +239,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.StockServiceLockFacadeTest.decreaseWithLock" />
+        <item itemvalue="Gradle.StockServiceLockFacadeTest.decreaseWithNonLock" />
         <item itemvalue="Gradle.StockServiceFacadeTest.decrease" />
+        <item itemvalue="Gradle.StockServiceFacadeTest" />
         <item itemvalue="Gradle.library-injection [build]" />
-        <item itemvalue="Gradle.library-injection [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -247,6 +270,12 @@
       <workItem from="1729997978735" duration="399000" />
       <workItem from="1729998387050" duration="70000" />
       <workItem from="1729998466497" duration="1294000" />
+      <workItem from="1730518122007" duration="35000" />
+      <workItem from="1730518163584" duration="2441000" />
+      <workItem from="1730527304617" duration="479000" />
+      <workItem from="1730534243131" duration="2058000" />
+      <workItem from="1730536830362" duration="550000" />
+      <workItem from="1730537385641" duration="696000" />
     </task>
     <task id="LOCAL-00001" summary="lib 주">
       <option name="closed" value="true" />
@@ -264,7 +293,39 @@
       <option name="project" value="LOCAL" />
       <updated>1729926844679</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="테스트 코드 추">
+      <option name="closed" value="true" />
+      <created>1730519896263</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730519896263</updated>
+    </task>
+    <task id="LOCAL-00004" summary="의존성 통합을 위한 fat-jar로 변">
+      <option name="closed" value="true" />
+      <created>1730527696878</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730527696878</updated>
+    </task>
+    <task id="LOCAL-00005" summary="별도의 테스트 추가">
+      <option name="closed" value="true" />
+      <created>1730537870229</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1730537870229</updated>
+    </task>
+    <task id="LOCAL-00006" summary="별도의 테스트 추가">
+      <option name="closed" value="true" />
+      <created>1730537875953</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730537875953</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +334,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="lib 주입" />
     <MESSAGE value="저장소 생성" />
-    <option name="LAST_COMMIT_MESSAGE" value="저장소 생성" />
+    <MESSAGE value="테스트 코드 추가" />
+    <MESSAGE value="의존성 통합을 위한 fat-jar로 변경" />
+    <MESSAGE value="별도의 테스트 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="별도의 테스트 추가" />
   </component>
 </project>

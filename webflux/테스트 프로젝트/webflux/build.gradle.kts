@@ -1,29 +1,31 @@
 plugins {
-	java
+	id("java")
+	kotlin("jvm") version "1.3.50"
 	id("org.springframework.boot") version "3.3.5"
 	id("io.spring.dependency-management") version "1.1.6"
 }
 
-group = "com.bombo"
 version = "0.0.1-SNAPSHOT"
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+subprojects {
+	apply(plugin = "idea")
+}
+
+allprojects {
+	apply(plugin = "project-report")
+	apply(plugin = "org.jetbrains.kotlin.jvm")
+	apply(plugin = "io.spring.dependency-management")
+
+	tasks.withType<Test> {
+		useJUnitPlatform()
 	}
-}
 
-repositories {
-	mavenCentral()
-}
+	repositories {
+		mavenCentral()
+	}
 
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("io.projectreactor:reactor-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
+	dependencies {
+		testImplementation("org.junit.jupiter:junit-jupiter-api")
+		testImplementation("org.junit.jupiter:junit-jupiter-params")
+	}
 }
