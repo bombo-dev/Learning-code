@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fc2b4d02-eae2-4c32-b405-1c6457de7120" name="Changes" comment="환경 구성 중간 점검">
+      <change afterPath="$PROJECT_DIR$/microservice-webflux/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservice-webflux/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservice-webflux/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/microservice-webflux/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-a/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-a/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-a/src/main/java/com/bombo/webflux/servera/ServerAApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-a/src/main/java/com/bombo/webflux/servera/ServerAApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-a/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-a/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-a/src/test/java/com/bombo/servera/ServerAApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-a/src/test/java/com/bombo/servera/ServerAApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-b/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-b/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-b/src/main/java/com/bombo/webflux/serverb/ServerBApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-b/src/main/java/com/bombo/webflux/serverb/ServerBApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-b/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-b/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/apps/server-b/src/test/java/com/bombo/serverb/ServerBApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/apps/server-b/src/test/java/com/bombo/serverb/ServerBApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/libs/application/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/libs/application/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/libs/http-core/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/libs/http-core/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/libs/http-core/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/libs/http-core/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/microservice-webflux/libs/http-core/src/test/java/com/bombo/httpcore/HttpCoreApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/microservice-webflux2/libs/http-core/src/test/java/com/bombo/httpcore/HttpCoreApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux/app">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux/apps">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux/apps/server-a">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux/apps/server-b">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux/libs">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/microservice-webflux/libs/http-core">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="microservice-webflux" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2oIDuFRSJ9pA00hZtLL6p3jowEF" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/moonjongwn/Documents/002_GITHUB/001_STUDY/Learning-code/webflux/테스트 프로젝트/webflux&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/microservice-webflux/apps/server-b/src/main/java/com/bombo/webflux" />
+      <recent name="$PROJECT_DIR$/microservice-webflux/apps/server-a/src/main/java/com/bombo/webflux" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.MicroserviceWebfluxApplication">
+    <configuration name="AppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="app.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.app.AppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="apps.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.apps.AppsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpCoreApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="http-core.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.httpcore.HttpCoreApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="libs.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.libs.LibsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MicroserviceWebfluxApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="microservice-webflux.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.microservicewebflux.MicroserviceWebfluxApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="server-a.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.servera.ServerAApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerBApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="server-b.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bombo.serverb.ServerBApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StandaloneScriptsStorage">
+    <option name="files">
+      <set>
+        <option value="$PROJECT_DIR$/microservice-webflux/apps/server-a/build.gradle.kts" />
+      </set>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc2b4d02-eae2-4c32-b405-1c6457de7120" name="Changes" comment="" />
+      <created>1730548416296</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730548416296</updated>
+      <workItem from="1730548417329" duration="1855000" />
+      <workItem from="1730645003829" duration="545000" />
+      <workItem from="1730763988450" duration="1743000" />
+      <workItem from="1730765743883" duration="343000" />
+      <workItem from="1730766107129" duration="779000" />
+      <workItem from="1730766893860" duration="650000" />
+      <workItem from="1730767597068" duration="133000" />
+      <workItem from="1730767736478" duration="391000" />
+      <workItem from="1730904620895" duration="293000" />
+      <workItem from="1730904945660" duration="58000" />
+    </task>
+    <task id="LOCAL-00001" summary="webflux 학습을 위한 프로젝트 초기화">
+      <option name="closed" value="true" />
+      <created>1730549026695</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730549026695</updated>
+    </task>
+    <task id="LOCAL-00002" summary="분산 환경 서버 추가">
+      <option name="closed" value="true" />
+      <created>1730645536807</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730645536807</updated>
+    </task>
+    <task id="LOCAL-00003" summary="환경 구성 중간 점검">
+      <option name="closed" value="true" />
+      <created>1730768123165</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730768123165</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="webflux 학습을 위한 프로젝트 초기화" />
+    <MESSAGE value="분산 환경 서버 추가" />
+    <MESSAGE value="환경 구성 중간 점검" />
+    <option name="LAST_COMMIT_MESSAGE" value="환경 구성 중간 점검" />
+  </component>
+</project>
