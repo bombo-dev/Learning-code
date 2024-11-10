@@ -1,6 +1,14 @@
 package com.bombo.template.multijava.controller.base;
 
 import com.bombo.template.multijava.usecase.AppUseCase;
+import org.springframework.web.bind.annotation.RestController;
 
-public class BaseController implements AppUseCase {
+@RestController
+public class BaseController {
+
+    private final AppUseCase appUseCase;
+
+    public BaseController(AppUseCase appUseCase) {
+        this.appUseCase = appUseCase;
+    }
 }
