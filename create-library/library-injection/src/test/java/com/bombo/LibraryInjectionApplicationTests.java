@@ -8,6 +8,6 @@ class LibraryInjectionApplicationTests {
 
     @Test
     void contextLoads() {
-    }
 
+    }
 }
