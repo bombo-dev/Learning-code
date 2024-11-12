@@ -1,6 +1,5 @@
 package com.bombo.template.multijava.configuration;
 
-import com.bombo.template.multijava.domain.DomainModule;
 import com.bombo.template.multijava.persistence.PersistenceModule;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -13,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.sql.DataSource;
 
 @Configuration
-@EntityScan(basePackageClasses = DomainModule.class)
+@EntityScan(basePackageClasses = PersistenceModule.class)
 @EnableJpaRepositories(basePackageClasses = PersistenceModule.class)
 public class PersistenceJpaConfiguration {
 
