@@ -20,14 +20,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StockServiceLockFacadeTest {
 
-    private StockInMemoryRepository stockInMemoryRepository = new StockInMemoryRepository();
+    private static final int THREAD_COUNT = 100;
+    private static final int EXECUTE_COUNT = 300;
 
-    private StockServiceFacade stockServiceLockFacade;
+    private StockInMemoryRepository stockInMemoryRepository = new StockInMemoryRepository();
 
     @BeforeEach
     void setUp() {
         Stock stock = Stock.builder()
-                .count(100L)
+                .count(300L)
                 .build();
 
         stockInMemoryRepository.save(stock);
@@ -37,7 +38,7 @@ class StockServiceLockFacadeTest {
     @Test
     void decreaseWithLock() throws InterruptedException {
         // given
-        stockServiceLockFacade = new StockServiceLockFacade(new StockBaseService(stockInMemoryRepository));
+        StockServiceFacade stockServiceLockFacade = new StockServiceLockFacade(new StockBaseService(stockInMemoryRepository));
 
         Config config = new Config();
         config.useSingleServer().setAddress("redis://localhost:6379");
@@ -48,12 +49,11 @@ class StockServiceLockFacadeTest {
         factory.addAspect(new DistributedLockAop(redissonClient));
         StockServiceLockFacade proxy = factory.getProxy();
 
-        int numberOfThread = 100;
-        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThread);
-        CountDownLatch countDownLatch = new CountDownLatch(numberOfThread);
+        ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
+        CountDownLatch countDownLatch = new CountDownLatch(EXECUTE_COUNT);
 
         // when
-        for (int i = 0; i < numberOfThread; i++) {
+        for (int i = 0; i < EXECUTE_COUNT; i++) {
             executorService.submit(() -> {
                 try {
                     proxy.decrease(1L);
@@ -75,14 +75,13 @@ class StockServiceLockFacadeTest {
     @Test
     void decreaseWithNonLock() throws InterruptedException {
         // given
-        stockServiceLockFacade = new StockNonLockedServiceFacade(new StockBaseService(stockInMemoryRepository));
+        StockServiceFacade stockServiceLockFacade = new StockNonLockedServiceFacade(new StockBaseService(stockInMemoryRepository));
 
-        int numberOfThread = 100;
-        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThread);
-        CountDownLatch countDownLatch = new CountDownLatch(numberOfThread);
+        ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
+        CountDownLatch countDownLatch = new CountDownLatch(EXECUTE_COUNT);
 
         // when
-        for (int i = 0; i < numberOfThread; i++) {
+        for (int i = 0; i < EXECUTE_COUNT; i++) {
             executorService.submit(() -> {
                 stockServiceLockFacade.decrease(1L);
                 countDownLatch.countDown();
@@ -94,6 +93,7 @@ class StockServiceLockFacadeTest {
         Stock stock = stockInMemoryRepository.findById(1L).get();
 
         // then
+        System.out.println("현재 남은 재고 수 : "  + stock.getCount());
         assertThat(stock.getCount()).isNotZero();
     }
 
