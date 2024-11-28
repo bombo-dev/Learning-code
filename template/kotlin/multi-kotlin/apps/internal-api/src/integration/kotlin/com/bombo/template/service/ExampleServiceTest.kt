@@ -1,21 +1,12 @@
 package com.bombo.template.service
 
+import com.bombo.template.IntegrationTestContainer
 import com.bombo.template.domain.example.Example
-import com.bombo.template.domain.example.ExampleRepository
 import com.bombo.template.usecase.example.command.ExampleUpdateCommand
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
-class ExampleServiceTest {
-
-    @Autowired
-    private lateinit var exampleService: ExampleService
-
-    @Autowired
-    private lateinit var exampleRepository: ExampleRepository
+class ExampleServiceTest : IntegrationTestContainer() {
 
     @Test
     fun update() {

@@ -7,6 +7,7 @@ dependencies {
     runtimeOnly(project(":libs:storage:db-core"))
 
     testImplementation(project(":common-libs:tests"))
+    testImplementation("org.springframework:spring-tx")
 
     // web
     implementation("org.springframework.boot:spring-boot-starter-web")
