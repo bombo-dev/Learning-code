@@ -1,12 +1,11 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
-import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version Versions.springBootVersion apply false
     id("io.spring.dependency-management") version Versions.springDependencyManagementPluginVersion apply false
-    id("com.coditory.integration-test") version Versions.integrationTestPlugin apply false
+    id("com.coditory.integration-test") version Versions.integrationTestPluginVersion apply false
     kotlin("plugin.serialization") version Versions.kotlinVersion apply false
     kotlin("jvm") version Versions.kotlinVersion apply false
     kotlin("kapt") version Versions.kotlinVersion apply false
@@ -34,8 +33,17 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
 
     configure<DependencyManagementExtension> {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${Versions.springCloudDependenciesVersion}")
+        }
         dependencies {
-            dependency("io.mockk:mockk:${Versions.mockk}")
+            dependency("io.mockk:mockk:${Versions.mockkVersion}")
+            dependencySet("com.epages:${Versions.restdocsApiSepcVersion}") {
+                entry("restdocs-api-spec")
+                entry("restdocs-api-spec-mockmvc")
+                entry("restdocs-api-spec-restassured")
+                entry("restdocs-api-spec-webtestclient")
+            }
         }
     }
 
@@ -50,6 +58,7 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
         testImplementation("org.junit.jupiter:junit-jupiter-api")
         testImplementation("org.junit.jupiter:junit-jupiter-params")
@@ -62,6 +71,9 @@ subprojects {
         integrationImplementation("org.junit.jupiter:junit-jupiter-api")
         integrationImplementation("org.junit.jupiter:junit-jupiter-params")
         integrationImplementation("org.assertj:assertj-core")
+        integrationImplementation("org.mockito:mockito-core")
+        integrationImplementation("org.mockito:mockito-junit-jupiter")
+        integrationImplementation("io.mockk:mockk")
         integrationRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     }
 

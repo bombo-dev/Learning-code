@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: resale-admin-api
+  config:
+    import:
+      - monitoring.yml
+      - logging.yml
+
+server:
+  tomcat:
+    max-connections: 20000
+    threads:
+      max: 600
+      min-spare: 100

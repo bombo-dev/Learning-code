@@ -4,5 +4,12 @@ plugins {
 rootProject.name = "multi-kotlin"
 
 include(
-    "apps:internal-api"
+    "common-libs:logging",
+    "common-libs:monitoring",
+    "common-libs:util",
+    "common-libs:tests",
+    "apps:internal-api",
+    "libs:storage:db-core",
+    "libs:http-client",
+    "libs:application",
 )
