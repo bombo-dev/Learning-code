@@ -66,6 +66,7 @@ subprojects {
         testImplementation("org.mockito:mockito-core")
         testImplementation("org.mockito:mockito-junit-jupiter")
         testImplementation("io.mockk:mockk")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
         integrationImplementation("org.junit.jupiter:junit-jupiter-api")

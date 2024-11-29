@@ -2,11 +2,12 @@ spring:
   profiles:
     active: local
   application:
-    name: resale-admin-api
+    name: internal-api
   config:
     import:
       - monitoring.yml
       - logging.yml
+      - http-client.yml
 
 server:
   tomcat:

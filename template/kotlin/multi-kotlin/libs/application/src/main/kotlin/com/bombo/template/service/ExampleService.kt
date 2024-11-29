@@ -1,8 +1,10 @@
 package com.bombo.template.service
 
+import com.bombo.template.domain.example.Example
 import com.bombo.template.domain.example.ExampleRepository
 import com.bombo.template.usecase.dto.ExampleDto
 import com.bombo.template.usecase.example.ExampleUseCase
+import com.bombo.template.usecase.example.command.ExampleCreateCommand
 import com.bombo.template.usecase.example.command.ExampleUpdateCommand
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -25,5 +27,12 @@ class ExampleService(
         exampleRepository.save(example)
 
         return ExampleDto(example.name)
+    }
+
+    override fun create(command: ExampleCreateCommand): Long {
+        val newExample = Example.newInstance(command.name)
+        val savedId = exampleRepository.save(newExample)
+
+        return savedId
     }
 }
