@@ -1,12 +1,12 @@
 package com.bombo.template.service
 
-import com.bombo.template.IntegrationTestContainer
+import com.bombo.template.ApplicationContextTest
 import com.bombo.template.domain.example.Example
 import com.bombo.template.usecase.example.command.ExampleUpdateCommand
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
-class ExampleServiceTest : IntegrationTestContainer() {
+class ExampleServiceTest : ApplicationContextTest() {
 
     @Test
     fun update() {
