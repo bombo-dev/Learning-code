@@ -33,8 +33,8 @@ public class UserWebClient implements UserHttp {
         return UriComponentsBuilder.newInstance()
                 .scheme("http")
                 .host("localhost")
-                .port(8080)
-                .path("/v1/users")
+                .port(8081)
+                .path("/api/v1/users")
                 .build()
                 .encode()
                 .toUri();

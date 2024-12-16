@@ -4,6 +4,7 @@ import com.bombo.template.multijava.domain.user.User;
 import com.bombo.template.multijava.domain.user.UserHttp;
 import com.bombo.template.multijava.usecase.UserUseCase;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StopWatch;
 
 @Service
 public class BaseService implements UserUseCase {
@@ -16,6 +17,13 @@ public class BaseService implements UserUseCase {
 
     @Override
     public User getUser(Long id) {
-        return userHttp.getUser(id);
+        StopWatch stopWatch = new StopWatch("getUserInternal");
+        stopWatch.start();
+        User user = userHttp.getUser(id);
+        stopWatch.stop();
+
+        System.out.println("===== " + stopWatch.prettyPrint() + " =====");
+
+        return user;
     }
 }

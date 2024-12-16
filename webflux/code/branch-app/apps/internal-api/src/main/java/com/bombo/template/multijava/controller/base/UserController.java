@@ -17,7 +17,8 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/users/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getUser(@PathVariable Long id) throws InterruptedException {
+        Thread.sleep(5000);
         return ResponseEntity.ok(userUseCase.getUser(id));
     }
 }

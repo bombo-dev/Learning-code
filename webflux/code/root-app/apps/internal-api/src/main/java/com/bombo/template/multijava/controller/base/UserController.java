@@ -24,7 +24,7 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start("getUser");
-        User user = userUseCase.getUser(id);
+        User user = userUseCase.getUser(id); // RestTemplate 당연히 여기는 블락
         stopWatch.stop();
         log.info("===== {} =====", stopWatch.prettyPrint());
         return ResponseEntity.ok(user);
