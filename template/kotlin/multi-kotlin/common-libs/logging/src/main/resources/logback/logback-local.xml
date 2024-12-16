@@ -10,7 +10,7 @@
     <logger name="org.hibernate.stat" level="DEBUG"/>
     <logger name="org.hibernate.type.BasicTypeRegistry" level="WARN"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

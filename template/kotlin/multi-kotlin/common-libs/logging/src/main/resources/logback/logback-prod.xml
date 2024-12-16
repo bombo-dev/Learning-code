@@ -4,7 +4,7 @@
 
     <logger name="com.bombo" level="INFO"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="APPLICATION_JSON"/>
     </root>
 </configuration>

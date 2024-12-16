@@ -2,6 +2,7 @@ package com.bombo.template.service
 
 import com.bombo.template.domain.example.Example
 import com.bombo.template.domain.example.ExampleRepository
+import com.bombo.template.logging.log
 import com.bombo.template.usecase.dto.ExampleDto
 import com.bombo.template.usecase.example.ExampleUseCase
 import com.bombo.template.usecase.example.command.ExampleCreateCommand
@@ -15,6 +16,8 @@ class ExampleService(
     private val exampleRepository: ExampleRepository,
 ) : ExampleUseCase {
 
+    private val log = log()
+
     override fun findExample(id: Long): ExampleDto {
         val example = exampleRepository.findById(id) ?: throw IllegalArgumentException("Example not found")
         return ExampleDto(example.name)
@@ -24,6 +27,8 @@ class ExampleService(
     override fun update(command: ExampleUpdateCommand): ExampleDto {
         val example = exampleRepository.findById(command.id) ?: throw IllegalArgumentException("Example not found")
         example.changeName(command.name)
+
+        log.debug { "example changeName : ${example.name}" }
         exampleRepository.save(example)
 
         return ExampleDto(example.name)
