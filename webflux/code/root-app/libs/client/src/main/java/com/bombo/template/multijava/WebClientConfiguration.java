@@ -19,18 +19,18 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class WebClientConfiguration implements WebFluxConfigurer {
 
-    private static final int MS_TO_SECONDS = 1000;
+    public static final long MINUTE_TO_SECONDS = 60;
+    private static final long MS_TO_SECONDS = 1000;
 
     @Bean
     public WebClient webClient() {
         HttpClient httpClient = HttpClient.create()
                 .resolver(DefaultAddressResolverGroup.INSTANCE)
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10 * MS_TO_SECONDS)
-                .responseTimeout(Duration.ofMillis(60 * MS_TO_SECONDS))
-                .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(60 * MS_TO_SECONDS, TimeUnit.MILLISECONDS))
-                            .addHandlerLast(new WriteTimeoutHandler(60 * MS_TO_SECONDS, TimeUnit.MILLISECONDS));
-                });
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, (int) (10 * MS_TO_SECONDS))
+                .responseTimeout(Duration.ofMillis(MINUTE_TO_SECONDS * MS_TO_SECONDS))
+                .doOnConnected(connection ->
+                        connection.addHandlerLast(new ReadTimeoutHandler(MINUTE_TO_SECONDS * MS_TO_SECONDS, TimeUnit.MILLISECONDS))
+                                .addHandlerLast(new WriteTimeoutHandler(MINUTE_TO_SECONDS * MS_TO_SECONDS, TimeUnit.MILLISECONDS)));
 
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient))

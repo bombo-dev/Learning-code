@@ -9,11 +9,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Component
-public class UserWebClient implements UserHttp {
+public class UserReaderRestHttp implements UserHttp {
 
     private final RestTemplate restTemplate;
 
-    public UserWebClient() {
+    public UserReaderRestHttp() {
         this.restTemplate = new RestTemplate();
     }
 
