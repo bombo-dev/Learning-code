@@ -1,7 +1,8 @@
 # 스프링으로 시작하는 리액티브 프로그래밍
 
 ## 리액티브 프로그래밍 마인드맵
-![image](https://github.com/user-attachments/assets/1104ca1b-8eec-4f83-b2c0-46a67e0161b1)
+![image](https://github.com/user-attachments/assets/5f274236-2e56-471b-9a55-7f3d12750f0e)
+
 
 ## 마인드맵 내용 정리 -> to gpt
 
